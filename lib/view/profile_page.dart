@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:superhero_lexicon/components/bio_list.dart';
+import 'package:http/http.dart';
+import 'package:provider/provider.dart';
+import 'package:superhero_lexicon/components/bio_circular_process.dart';
+import 'package:superhero_lexicon/components/bio_discription.dart';
+import 'package:superhero_lexicon/components/bio_head.dart';
+import 'package:superhero_lexicon/components/bio_ltem.dart';
+import 'package:superhero_lexicon/components/bio_title.dart';
+import 'package:superhero_lexicon/modal/info_modal.dart';
+import 'package:superhero_lexicon/provider/home_provider.dart';
+import 'package:superhero_lexicon/provider/profile_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -9,135 +18,196 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+   Map<String,dynamic> profiledata={};
+
+
+   
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileProvider>().getHeroDetails();
+
+    // TODO: implement initState
+    // fetchProfile();
+  }
+ 
+
+  // Future<void> fetchProfile() async {
+  //   final profileinfoprovider = Provider.of<ProfileProvider>(
+  //     context,
+  //     listen: false,
+  //   );
+  //   await profileinfoprovider.getHeroDetails();
+  // }
+
+  //get infodata => context.watch<HomeProvider>().homepagedata;
+  // get prodiledata => context.watch<ProfileProvider>().profilepagedata;
+
   @override
   Widget build(BuildContext context) {
+
+
+    final profileProvider = context.watch<ProfileProvider>();
+    Map<String, dynamic> heroData = profileProvider.heroData ?? {};
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 500,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/lg/1-a-bomb.jpg",
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BioHead(herodata:heroData),
 
-                Column(
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
                   children: [
-                    Container(height: 250),
-                    Container(
-                      height: 250,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            // ignore: deprecated_member_use
-                            Colors.black.withOpacity(1),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                    BioTitle(title: "BIO"),
 
-                SizedBox(
-                  height: 500,
-                  child: Column(
-                    children: [
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SizedBox(
-                          width: double.infinity,
+                    BioItem(title: "Name", logo: 'assets/Icons/name.png',
+                    data: heroData["name"],),
+                    BioItem(
+                      title: "Full Name",
+                      logo: 'assets/Icons/fullname.png',
+                      data: heroData["biography"]["fullName"],
+                      
+                    ),
+                    BioItem(
+                      title: "Alter Ego",
+                      logo: 'assets/Icons/alterego.png',
+                    ),
+                    BioItem(
+                      title: "Place of Birth",
+                      logo: 'assets/Icons/placeofbirth.png',
+                    ),
+                    BioItem(
+                      title: "First Appearance",
+                      logo: 'assets/Icons/first.png',
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: BioItem(
+                            title: "Publisher",
+                            logo: 'assets/Icons/publisher.png',
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Expanded(
+                          flex: 2,
+                          child: BioItem(
+                            title: "Alignment",
+                            logo: 'assets/Icons/alignment.png',
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 10),
+
+                    BioTitle(title: "POWER STATS"),
+
+                    SizedBox(height: 10),
+                    GridView.count(
+                      crossAxisCount: 3,
+                      shrinkWrap: true,
+                      mainAxisSpacing: 1,
+                      crossAxisSpacing: 1,
+                      padding: EdgeInsets.all(1),
+
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        BioCircularProcess(labal: "Intelligence"),
+                        BioCircularProcess(labal: "Strength"),
+                        BioCircularProcess(labal: "Speed"),
+                        BioCircularProcess(labal: "Durability"),
+                        BioCircularProcess(labal: "Power"),
+                        BioCircularProcess(labal: "Combat"),
+                      ],
+                    ),
+
+                    SizedBox(height: 10),
+
+                    BioTitle(title: "ALIASES"),
+
+                    SizedBox(height: 10),
+
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
                           child: Text(
-                            "name",
-                            style: TextStyle(color: Colors.white, fontSize: 35),
+                            "NAME NAME",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+
+                    SizedBox(height: 10),
+
+                    BioTitle(title: "APPEARANCE"),
+
+                    SizedBox(height: 10),
+                    GridView.count(
+                      crossAxisCount: 2,
+                      shrinkWrap: true,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      padding: EdgeInsets.all(1),
+                      childAspectRatio: 2,
+
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        BioItem(
+                          title: "gender",
+                          logo: 'assets/Icons/gender.png',
+                        ),
+                        BioItem(title: "Race", logo: 'assets/Icons/race.png'),
+                        BioItem(
+                          title: "Heigth",
+                          logo: 'assets/Icons/height.png',
+                        ),
+                        BioItem(
+                          title: "Weight",
+                          logo: 'assets/Icons/weight.png',
+                        ),
+                        BioItem(
+                          title: "Eye Color",
+                          logo: 'assets/Icons/eye.png',
+                        ),
+                        BioItem(
+                          title: "Hair Color",
+                          logo: 'assets/Icons/haircolor.png',
+                        ),
+                      ],
+                    ),
+
+                    Column(
+                      children: [
+                        BioDiscription(title: "OCCUPATION"),
+                        BioDiscription(title: "BASE"),
+                        BioDiscription(title: "GROUP AFFILIATION"),
+                        BioDiscription(title: "RELATIVES"),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      "BIO",
-                      style: TextStyle(
-                        color: Colors.yellow,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-
-                  BioItem(),
-                  BioItem(),
-                  BioItem(),
-                  BioItem(),
-                  BioItem(),
- 
-
-                  Row(
-                    children: [
-                      Expanded(flex: 3, child:  BioItem(),),
-                      SizedBox(width: 8),
-                      Expanded(flex: 2, child:  BioItem(),),
-                    ],
-                  ),
-
-                  SizedBox(height: 10),
-
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      "POWER STATS",
-                      style: TextStyle(
-                        color: Colors.yellow,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-
-                  // Container(
-                  //   width: 90,
-                  //   height: 90,
-                  //   child: CircularProgressIndicator(
-                  //     value: 0.5,
-                  //     strokeWidth: 100,
-                  //     backgroundColor: const Color.fromARGB(255, 47, 59, 41),
-                  //     valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 238, 237, 236)),
-                  //   ),
-                  // )
-
-
-
-
-
-                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
