@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:superhero_lexicon/modal/info_modal.dart';
 import 'package:superhero_lexicon/view/profile_page.dart';
 
 class Intro extends StatefulWidget {
   final String name;
   final String image;
   final int id;
-  
+
   const Intro({
     super.key,
-     required this.name,
-      required this.image,
-      required this.id,
-      
+    required this.name,
+    required this.image,
+    required this.id,
   });
 
   @override
@@ -26,10 +24,7 @@ class _IntroState extends State<Intro> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage(
- 
-            
-            )),
+          MaterialPageRoute(builder: (context) => ProfilePage(id: widget.id)),
         );
       },
       child: Stack(
@@ -37,16 +32,14 @@ class _IntroState extends State<Intro> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(
-                  widget.image,
-                ),
+                image: NetworkImage(widget.image),
                 fit: BoxFit.cover,
               ),
-              color: Colors.blue,
+              
               borderRadius: BorderRadius.circular(20),
             ),
-            width: 200,
-            height: 300,
+            width: double.infinity,
+            height: double.infinity,
           ),
 
           Column(

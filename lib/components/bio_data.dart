@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-class BioItem extends StatefulWidget {
+class BioData extends StatefulWidget {
   final String? title;
   final String logo;
   final String? data;
-  
 
-  const BioItem({super.key, 
-  this.title, 
-  required this.logo, 
-  this.data});
+  const BioData({
+    super.key,
+    this.title,
+    required this.logo,
+    this.data
+    });
 
   @override
-  State<BioItem> createState() => _BioItemState();
+  State<BioData> createState() => _BioItemState();
 }
 
-class _BioItemState extends State<BioItem> {
+class _BioItemState extends State<BioData> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,11 +35,9 @@ class _BioItemState extends State<BioItem> {
             children: [
               Row(
                 children: [
-
                   ImageIcon(
                     AssetImage(widget.logo),
                     size: 20,
-                    //color: Colors.yellow,
                   ),
                   SizedBox(width: 10),
                   Text(widget.title ?? "null", style: TextStyle(fontSize: 18)),
@@ -48,7 +47,7 @@ class _BioItemState extends State<BioItem> {
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Text(
-                  widget.data??"null",
+                  widget.data ?? "null",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),

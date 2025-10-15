@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superhero_lexicon/provider/home_provider.dart';
 import 'package:superhero_lexicon/provider/profile_provider.dart';
 import 'package:superhero_lexicon/view/home_page.dart';
-import 'package:superhero_lexicon/view/profile_page.dart';
 
 void main() {
   runApp(
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     // homeProvider.homeProvider();
-    context.read<HomeProvider>().homeProvider();
+    // context.read<HomeProvider>().homeProvider();
 
     super.initState();
   }
@@ -44,7 +44,47 @@ class _MyAppState extends State<MyApp> {
 
       home:
           //ProfilePage()
-          HomePage(),
+          //HomePage(),
+          Loading(),
+    );
+  }
+}
+
+class Loading extends StatefulWidget {
+  const Loading({super.key});
+
+  @override
+  State<Loading> createState() => _LoadingState();
+}
+
+class _LoadingState extends State<Loading> {
+  @override
+  void initState() {
+    Timer(
+      Duration(seconds: 3),
+      () => Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (_) => HomePage())),
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/role-model.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

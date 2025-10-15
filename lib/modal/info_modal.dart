@@ -9,16 +9,17 @@ class InfoModal {
   Connections? connections;
   Images? images;
 
-  InfoModal(
-      {this.id,
-      this.name,
-      this.slug,
-      this.powerstats,
-      this.appearance,
-      this.biography,
-      this.work,
-      this.connections,
-      this.images});
+  InfoModal({
+    this.id,
+    this.name,
+    this.slug,
+    this.powerstats,
+    this.appearance,
+    this.biography,
+    this.work,
+    this.connections,
+    this.images,
+  });
 
   InfoModal.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -37,8 +38,9 @@ class InfoModal {
     connections = json['connections'] != null
         ? new Connections.fromJson(json['connections'])
         : null;
-    images =
-        json['images'] != null ? new Images.fromJson(json['images']) : null;
+    images = json['images'] != null
+        ? new Images.fromJson(json['images'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -76,13 +78,14 @@ class Powerstats {
   int? power;
   int? combat;
 
-  Powerstats(
-      {this.intelligence,
-      this.strength,
-      this.speed,
-      this.durability,
-      this.power,
-      this.combat});
+  Powerstats({
+    this.intelligence,
+    this.strength,
+    this.speed,
+    this.durability,
+    this.power,
+    this.combat,
+  });
 
   Powerstats.fromJson(Map<String, dynamic> json) {
     intelligence = json['intelligence'];
@@ -113,13 +116,14 @@ class Appearance {
   String? eyeColor;
   String? hairColor;
 
-  Appearance(
-      {this.gender,
-      this.race,
-      this.height,
-      this.weight,
-      this.eyeColor,
-      this.hairColor});
+  Appearance({
+    this.gender,
+    this.race,
+    this.height,
+    this.weight,
+    this.eyeColor,
+    this.hairColor,
+  });
 
   Appearance.fromJson(Map<String, dynamic> json) {
     gender = json['gender'];
@@ -132,7 +136,7 @@ class Appearance {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['gender'] = this.gender;
+    data['gender'] = gender;
     data['race'] = this.race;
     data['height'] = this.height;
     data['weight'] = this.weight;
@@ -151,14 +155,15 @@ class Biography {
   String? publisher;
   String? alignment;
 
-  Biography(
-      {this.fullName,
-      this.alterEgos,
-      this.aliases,
-      this.placeOfBirth,
-      this.firstAppearance,
-      this.publisher,
-      this.alignment});
+  Biography({
+    this.fullName,
+    this.alterEgos,
+    this.aliases,
+    this.placeOfBirth,
+    this.firstAppearance,
+    this.publisher,
+    this.alignment,
+  });
 
   Biography.fromJson(Map<String, dynamic> json) {
     fullName = json['fullName'];

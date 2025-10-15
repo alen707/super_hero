@@ -10,22 +10,22 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
- 
+
 class _HomePageState extends State<HomePage> {
-//  int total=0;
-// Future<void> first() async{
-//   total =  await context.watch<HomeProvider>().introNum;
-// }
+  bool get waiting => context.watch<HomeProvider>().waiting;
   int get total => context.watch<HomeProvider>().introNum;
-   get infodata => context.watch<HomeProvider>().homepagedata;
 
-  
-
-
+  TextEditingController searchController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeProvider>().getHomeinfo();
+  }
 
+  @override
   Widget build(BuildContext context) {
+    List<InfoModal> filtedList = context.watch<HomeProvider>().filtedList;
     return Scaffold(
       backgroundColor: Colors.black87,
 
@@ -50,6 +50,12 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextField(
+                controller: searchController,
+
+                onChanged: (value) {
+                  print("Searching for: $value");
+                  context.read<HomeProvider>().filterItem(value);
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Search heroes...",
@@ -63,32 +69,27 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-      body: SafeArea(
-        child: GridView.count(
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          mainAxisSpacing: 15,
-          crossAxisSpacing: 15,
-          padding: EdgeInsets.all(10),
-          childAspectRatio: .6,
+      body: waiting
+          ? SafeArea(child: Center(child: CircularProgressIndicator()))
+          : SafeArea(
+              child: GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 15,
+                padding: EdgeInsets.all(10),
+                childAspectRatio: .6,
 
-          children: List.generate(total, (index) {
-            // print("total");
-            // print(total);
-            // print(total);
-            // print(total);
-            // print(total);
-          
-            return Intro(
-              name: infodata[index].name,
-              image: infodata[index].images?.md,
-              id: infodata[index].id,
-              
-
-            );
-          }),
-        ),
-      ),
+                children: List.generate(filtedList.length, (index) {
+                  final info = filtedList[index];
+                  return Intro(
+                    name: info.name ?? "unnoun",
+                    image: info.images?.md ?? "",
+                    id: info.id ?? 0,
+                  );
+                }),
+              ),
+            ),
     );
   }
 }

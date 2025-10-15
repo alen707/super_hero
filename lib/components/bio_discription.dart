@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class BioDiscription extends StatefulWidget {
+  final String? data;
   final String title;
-  const BioDiscription({super.key, required this.title});
+  const BioDiscription({super.key, required this.title, required this.data});
 
   @override
   State<BioDiscription> createState() => _BioDiscriptionState();
@@ -32,7 +33,7 @@ class _BioDiscriptionState extends State<BioDiscription> {
         SizedBox(
           width: double.infinity,
           child: Text(
-            "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+            widget.data ?? "null",
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
