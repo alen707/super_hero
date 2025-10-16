@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:superhero_lexicon/api/home_api.dart';
-import 'package:superhero_lexicon/modal/info_modal.dart';
+import 'package:superhero_lexicon/modal/service/home_api.dart';
+import 'package:superhero_lexicon/modal/repository/info_modal.dart';
 
 class HomeProvider extends ChangeNotifier {
   final homeApi = HomeApi();

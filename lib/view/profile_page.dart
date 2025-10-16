@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:superhero_lexicon/components/bio_circular_process.dart';
-import 'package:superhero_lexicon/components/bio_discription.dart';
-import 'package:superhero_lexicon/components/bio_head.dart';
-import 'package:superhero_lexicon/components/bio_data.dart';
-import 'package:superhero_lexicon/components/bio_title.dart';
-import 'package:superhero_lexicon/modal/info_modal.dart';
-import 'package:superhero_lexicon/provider/profile_provider.dart';
+import 'package:superhero_lexicon/shared/widget/bio_circular_process.dart';
+import 'package:superhero_lexicon/shared/widget/bio_discription.dart';
+import 'package:superhero_lexicon/shared/widget/bio_head.dart';
+import 'package:superhero_lexicon/shared/widget/bio_data.dart';
+import 'package:superhero_lexicon/shared/widget/bio_title.dart';
+import 'package:superhero_lexicon/modal/repository/info_modal.dart';
+import 'package:superhero_lexicon/viewmodal/provider/profile_provider.dart';
 
 class ProfilePage extends StatefulWidget {
   final int? id;

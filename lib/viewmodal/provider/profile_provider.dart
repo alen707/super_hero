@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:superhero_lexicon/api/profile_api.dart';
-import 'package:superhero_lexicon/modal/info_modal.dart';
+import 'package:superhero_lexicon/modal/service/profile_api.dart';
+import 'package:superhero_lexicon/modal/repository/info_modal.dart';
 
 class ProfileProvider extends ChangeNotifier {
   

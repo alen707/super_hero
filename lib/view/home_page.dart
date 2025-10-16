@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:superhero_lexicon/components/intro.dart';
-import 'package:superhero_lexicon/modal/info_modal.dart';
-import 'package:superhero_lexicon/provider/home_provider.dart';
+import 'package:superhero_lexicon/shared/widget/intro.dart';
+import 'package:superhero_lexicon/modal/repository/info_modal.dart';
+import 'package:superhero_lexicon/viewmodal/provider/home_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -53,7 +53,6 @@ class _HomePageState extends State<HomePage> {
                 controller: searchController,
 
                 onChanged: (value) {
-                  print("Searching for: $value");
                   context.read<HomeProvider>().filterItem(value);
                 },
                 decoration: InputDecoration(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:superhero_lexicon/modal/info_modal.dart';
+import 'package:superhero_lexicon/modal/repository/info_modal.dart';
 
 class BioHead extends StatefulWidget {
   final InfoModal? herodata;

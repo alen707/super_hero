@@ -26,45 +26,46 @@ class InfoModal {
     name = json['name'];
     slug = json['slug'];
     powerstats = json['powerstats'] != null
-        ? new Powerstats.fromJson(json['powerstats'])
+        ? Powerstats.fromJson(json['powerstats'])
         : null;
     appearance = json['appearance'] != null
-        ? new Appearance.fromJson(json['appearance'])
+        ? Appearance.fromJson(json['appearance'])
         : null;
     biography = json['biography'] != null
-        ? new Biography.fromJson(json['biography'])
+        ? Biography.fromJson(json['biography'])
         : null;
-    work = json['work'] != null ? new Work.fromJson(json['work']) : null;
+    work = json['work'] != null ? Work.fromJson(json['work']) : null;
     connections = json['connections'] != null
-        ? new Connections.fromJson(json['connections'])
+        ? Connections.fromJson(json['connections'])
         : null;
     images = json['images'] != null
-        ? new Images.fromJson(json['images'])
+        ? Images.fromJson(json['images'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['slug'] = this.slug;
-    if (this.powerstats != null) {
-      data['powerstats'] = this.powerstats!.toJson();
+    // ignore: prefer_collection_literals
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['slug'] = slug;
+    if (powerstats != null) {
+      data['powerstats'] = powerstats!.toJson();
     }
-    if (this.appearance != null) {
-      data['appearance'] = this.appearance!.toJson();
+    if (appearance != null) {
+      data['appearance'] = appearance!.toJson();
     }
-    if (this.biography != null) {
-      data['biography'] = this.biography!.toJson();
+    if (biography != null) {
+      data['biography'] = biography!.toJson();
     }
-    if (this.work != null) {
-      data['work'] = this.work!.toJson();
+    if (work != null) {
+      data['work'] = work!.toJson();
     }
-    if (this.connections != null) {
-      data['connections'] = this.connections!.toJson();
+    if (connections != null) {
+      data['connections'] = connections!.toJson();
     }
-    if (this.images != null) {
-      data['images'] = this.images!.toJson();
+    if (images != null) {
+      data['images'] = images!.toJson();
     }
     return data;
   }
@@ -97,13 +98,13 @@ class Powerstats {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['intelligence'] = this.intelligence;
-    data['strength'] = this.strength;
-    data['speed'] = this.speed;
-    data['durability'] = this.durability;
-    data['power'] = this.power;
-    data['combat'] = this.combat;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['intelligence'] = intelligence;
+    data['strength'] = strength;
+    data['speed'] = speed;
+    data['durability'] = durability;
+    data['power'] = power;
+    data['combat'] = combat;
     return data;
   }
 }
@@ -135,13 +136,13 @@ class Appearance {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['gender'] = gender;
-    data['race'] = this.race;
-    data['height'] = this.height;
-    data['weight'] = this.weight;
-    data['eyeColor'] = this.eyeColor;
-    data['hairColor'] = this.hairColor;
+    data['race'] = race;
+    data['height'] = height;
+    data['weight'] = weight;
+    data['eyeColor'] = eyeColor;
+    data['hairColor'] = hairColor;
     return data;
   }
 }
@@ -176,14 +177,14 @@ class Biography {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fullName'] = this.fullName;
-    data['alterEgos'] = this.alterEgos;
-    data['aliases'] = this.aliases;
-    data['placeOfBirth'] = this.placeOfBirth;
-    data['firstAppearance'] = this.firstAppearance;
-    data['publisher'] = this.publisher;
-    data['alignment'] = this.alignment;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['fullName'] = fullName;
+    data['alterEgos'] = alterEgos;
+    data['aliases'] = aliases;
+    data['placeOfBirth'] = placeOfBirth;
+    data['firstAppearance'] = firstAppearance;
+    data['publisher'] = publisher;
+    data['alignment'] = alignment;
     return data;
   }
 }
@@ -200,9 +201,9 @@ class Work {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['occupation'] = this.occupation;
-    data['base'] = this.base;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['occupation'] = occupation;
+    data['base'] = base;
     return data;
   }
 }
@@ -219,9 +220,9 @@ class Connections {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['groupAffiliation'] = this.groupAffiliation;
-    data['relatives'] = this.relatives;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['groupAffiliation'] = groupAffiliation;
+    data['relatives'] = relatives;
     return data;
   }
 }
@@ -242,11 +243,11 @@ class Images {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['xs'] = this.xs;
-    data['sm'] = this.sm;
-    data['md'] = this.md;
-    data['lg'] = this.lg;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['xs'] = xs;
+    data['sm'] = sm;
+    data['md'] = md;
+    data['lg'] = lg;
     return data;
   }
 }
