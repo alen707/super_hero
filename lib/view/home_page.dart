@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.black87,
 
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "Explore",
           style: TextStyle(

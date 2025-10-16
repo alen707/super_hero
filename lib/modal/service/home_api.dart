@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:superhero_lexicon/core/urls.dart';
 import 'package:superhero_lexicon/modal/repository/info_modal.dart';
@@ -8,12 +9,22 @@ class HomeApi {
    String get homeUrlApi =>
       "${link.mainUrls}/${link.homepageUrls}";
   Future<List<InfoModal>> homeApi() async {
+    try{
     final response = await http.get(Uri.parse(homeUrlApi));
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
       return data.map((e) => InfoModal.fromJson(e)).toList();
-    } else {
+    } 
+    else {
+      debugPrint("fail....");
       return [];
     }
+  }
+  // ignore: empty_catches
+  catch (e){
+    debugPrint("wrong........");
+    return [];
+
+  }
   }
 }
